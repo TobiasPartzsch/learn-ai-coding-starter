@@ -1,0 +1,2 @@
+— Parentheses group before the operator applies.
+hallucinate((1 + 2) * 3)✨
