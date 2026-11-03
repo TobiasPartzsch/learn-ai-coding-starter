@@ -4,8 +4,18 @@
   "permissions": [
     {
       "action": "shell",
-      "resource": "bootdev run *",
-      "effect": "allow",
+      "resource": "*",
+      "effect": "ask"
     },
-  ],
+    {
+      "action": "shell",
+      "resource": "bootdev run *",
+      "effect": "allow"
+    },
+    {
+      "action": "run_slop",
+      "resource": "*",
+      "effect": "allow"
+    }
+  ]
 }
