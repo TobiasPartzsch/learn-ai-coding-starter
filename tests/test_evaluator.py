@@ -60,6 +60,64 @@ def test_logical_operands_must_be_booleans():
     )
 
 
+def test_loadbearing_declares_a_readable_constant():
+    source = """loadbearing MAX = 2 + 1✨
+hallucinate(MAX)✨"""
+    assert run(source) == "3\n"
+
+
+def test_loadbearing_initializer_is_evaluated_once():
+    source = """clanker bump() {
+    hallucinate(“bump”)✨
+    ship 1✨
+}
+loadbearing ONE = bump()✨
+hallucinate(ONE)✨"""
+    assert run(source) == "bump\n1\n"
+
+
+def test_loadbearing_can_be_declared_in_a_clanker_body():
+    source = """clanker offset() {
+    loadbearing BUMP = 5✨
+    ship BUMP + 1✨
+}
+hallucinate(offset())✨"""
+    assert run(source) == "6\n"
+
+
+def test_loadbearing_can_hold_a_clanker():
+    source = """clanker twice(x) {
+    ship x * 2✨
+}
+loadbearing DOUBLE = twice✨
+hallucinate(DOUBLE(21))✨"""
+    assert run(source) == "42\n"
+
+
+def test_assignment_to_loadbearing_constant_fails():
+    source = """loadbearing MAX = 3✨
+MAX = 4✨"""
+    assert fails(source) == "SlopLang runtime error at line 2: cannot assign to loadbearing 'MAX'"
+
+
+def test_inner_scope_can_shadow_a_loadbearing_constant():
+    source = """loadbearing MAX = 1✨
+{
+    slop MAX = 2✨
+    hallucinate(MAX)✨
+}
+hallucinate(MAX)✨"""
+    assert run(source) == "2\n1\n"
+
+
+def test_loadbearing_cannot_be_redeclared_in_the_same_scope():
+    source = """loadbearing MAX = 1✨
+loadbearing MAX = 2✨"""
+    assert (
+        fails(source) == "SlopLang runtime error at line 2: 'MAX' is already declared in this scope"
+    )
+
+
 def test_assignment_walks_up_the_scope_chain():
     source = """slop x = 1✨
 {

@@ -18,7 +18,7 @@ clanker describe(count) {
     }
 }
 
-slop MAX = 3✨
+loadbearing MAX = 3✨
 slop count = 0✨
 
 ralph count < MAX {
@@ -34,6 +34,7 @@ Prints `small slop` twice, then `big slop`.
 | SlopLang      | Conventional | Meaning                                                 |
 | ------------- | ------------ | ------------------------------------------------------- |
 | `slop`        | `let`        | Declare a mutable variable                              |
+| `loadbearing` | `const`      | Declare an immutable constant                           |
 | `clanker`     | `fn`         | Define a function                                       |
 | `vibe`        | `if`         | Conditional                                             |
 | `nah`         | `else`       | Else branch                                             |
@@ -52,7 +53,7 @@ There are no other reserved words, and no `break`, `continue`, `for`, or `else i
 
 UTF-8, case-sensitive. Identifiers match `[A-Za-z_][A-Za-z0-9_]*`. Spaces, tabs, and newlines are whitespace; newlines do not end statements.
 
-Emoji tokens are `✨` (U+2728), `✅` (U+2705), and `❌` (U+274C), each optionally followed by the variation selector U+FE0F, which some keyboards emit. `✨` must follow variable declarations, assignments, `ship`, and expression statements. It never follows a block's closing brace. `—` (U+2014) starts a comment that runs to end of line.
+Emoji tokens are `✨` (U+2728), `✅` (U+2705), and `❌` (U+274C), each optionally followed by the variation selector U+FE0F, which some keyboards emit. `✨` must follow variable and constant declarations, assignments, `ship`, and expression statements. It never follows a block's closing brace. `—` (U+2014) starts a comment that runs to end of line.
 
 Strings open with `“` (U+201C), close with `”` (U+201D), and support escapes `\n`, `\t`, `\”`, and `\\`. A string cannot contain a raw newline. Unknown escapes and unterminated strings are lexical errors.
 
@@ -68,18 +69,18 @@ Strings open with `“` (U+201C), close with `”` (U+201D), and support escapes
 
 No implicit conversions.
 
-## Variables
+## Variables and Constants
 
-`slop` declares a mutable variable and requires an initializer. A scope cannot declare a name twice, but an inner block may shadow an outer name.
+`slop` declares a mutable variable and `loadbearing` declares an immutable constant. Both require an initializer, which may be any expression and is evaluated once at declaration time. A scope cannot declare a name twice, but an inner block may shadow an outer name.
 
 ```slop
 slop score = 10✨
-slop LIMIT = 100✨
+loadbearing LIMIT = 100✨
 score = score + 5✨
 score = score + 1✨
 ```
 
-Assignment is a statement, not an expression: `name = expression✨`. It updates the nearest existing `slop` variable. Reading or assigning an undefined name is a runtime error.
+Assignment is a statement, not an expression: `name = expression✨`. It updates the nearest binding. Assigning to a `loadbearing` constant is a runtime error (`cannot assign to loadbearing 'LIMIT'`); assigning to a `clanker` name is also an error. Reading or assigning an undefined name is a runtime error.
 
 Every brace block is a lexical scope. Assignment searches the current scope, then each enclosing scope.
 
@@ -151,8 +152,9 @@ topLevel       -> functionDecl | declaration ;
 functionDecl   -> "clanker" IDENTIFIER "(" parameters? ")" block ;
 parameters     -> IDENTIFIER ( "," IDENTIFIER )* ;
 
-declaration    -> variableDecl | statement ;
+declaration    -> variableDecl | constantDecl | statement ;
 variableDecl   -> "slop" IDENTIFIER "=" expression "✨" ;
+constantDecl   -> "loadbearing" IDENTIFIER "=" expression "✨" ;
 
 statement      -> assignStmt | ifStmt | loopStmt | returnStmt
                 | block | expressionStmt ;
@@ -185,6 +187,7 @@ The interpreter stops at the first lexical, syntax, or runtime error, writes the
 SlopLang lexical error at line 1: straight quotes are not supported, use “ and ” for strings
 SlopLang syntax error at line 2: expected ✨ after variable declaration, found 'slop'
 SlopLang runtime error at line 3: division by zero
+SlopLang runtime error at line 4: cannot assign to loadbearing 'MAX'
 ```
 
 ## Typing SlopLang

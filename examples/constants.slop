@@ -1,0 +1,19 @@
+— loadbearing declares a constant. Assigning to it is a runtime error.
+loadbearing MAX = 3✨
+
+clanker describe(count) {
+    vibe count < MAX {
+        ship “small slop”✨
+    }
+    ship “big slop”✨
+}
+
+hallucinate(describe(0))✨
+hallucinate(describe(3))✨
+
+{
+    — Inner scopes may shadow a constant.
+    slop MAX = 10✨
+    hallucinate(MAX)✨
+}
+hallucinate(MAX)✨
