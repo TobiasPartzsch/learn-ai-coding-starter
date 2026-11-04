@@ -19,6 +19,16 @@
     },
     {
       "action": "shell",
+      "resource": "uv run ruff check",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run ty check",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
       "resource": "uv run sloperator.py *",
       "effect": "allow"
     },
