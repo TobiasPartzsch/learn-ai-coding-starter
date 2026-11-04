@@ -192,6 +192,13 @@ def test_runtime_type_errors(source: str, message: str):
     assert fails(source) == f"SlopLang runtime error at line 1: {message}"
 
 
+def test_hallucinate_accepts_any_number_of_arguments():
+    source = """hallucinate(“a”, 1, ✅)✨
+hallucinate()✨
+hallucinate(“only”)✨"""
+    assert run(source) == "a 1 ✅\n\nonly\n"
+
+
 def test_stringify_every_value_kind():
     source = """clanker f() { }
 hallucinate(0)✨
