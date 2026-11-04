@@ -4,18 +4,28 @@
   "permissions": [
     {
       "action": "shell",
-      "resource": "*",
-      "effect": "ask"
+      "resource": "bootdev run *",
+      "effect": "allow"
     },
     {
       "action": "shell",
-      "resource": "bootdev run *",
+      "resource": "uv run pytest *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run sloperator.py *",
       "effect": "allow"
     },
     {
       "action": "run_slop",
       "resource": "*",
       "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask"
     }
   ]
 }
