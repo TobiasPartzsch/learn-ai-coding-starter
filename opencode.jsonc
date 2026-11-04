@@ -19,17 +19,49 @@
     },
     {
       "action": "shell",
-      "resource": "uv run ruff check",
+      "resource": "uv run ruff check *",
       "effect": "allow"
     },
     {
       "action": "shell",
-      "resource": "uv run ty check",
+      "resource": "uv run ruff format *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run ty check *",
       "effect": "allow"
     },
     {
       "action": "shell",
       "resource": "uv run sloperator.py *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "opencode debug config",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "mktemp *",
+      "effect": "allow"
+    },
+    // Scratch files under /tmp/opencode. These are already allowed by the
+    // default policy, but stating them makes the intent explicit.
+    {
+      "action": "external_directory",
+      "resource": "/tmp/opencode/*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "/tmp/opencode/*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "/tmp/opencode/*",
       "effect": "allow"
     },
     {
