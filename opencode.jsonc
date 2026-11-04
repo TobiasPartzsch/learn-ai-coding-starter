@@ -1,6 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "opencode/deepseek-v4.1-flash-free",
+  "instructions": [
+    "TOOL USAGE POLICY:",
+    "- Always prefer native tools ('read', 'glob', 'grep', 'edit') over shell commands for file inspection and navigation.",
+    "- Never invoke 'cat', 'head', 'tail', 'grep', 'find', or 'ls' via the shell tool.",
+    "- Reserve the 'shell' tool exclusively for non-native tasks: test runners (pytest), linters (ruff), typecheckers (ty), and VCS (git)."
+  ],
+  "agents": {
+    "explore": {
+      "tools": {
+        "read": true,
+        "search": true,
+        "list": true,
+        "bash": false
+      } // Disallow shell/bash
+    },
+  },
   "permissions": [
     {
       "action": "shell",
@@ -39,7 +55,17 @@
     },
     {
       "action": "shell",
-      "resource": "opencode debug config",
+      "resource": "opencode debug config *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "opencode debug agents *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "opencode debug paths *",
       "effect": "allow"
     },
     {
@@ -68,6 +94,11 @@
       "action": "run_slop",
       "resource": "*",
       "effect": "allow"
+    },
+    {
+      "action": "subagent",
+      "resource": "explore",
+      "effect": "deny"
     },
   ]
 }
