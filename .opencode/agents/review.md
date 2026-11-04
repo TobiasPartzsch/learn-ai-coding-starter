@@ -1,6 +1,7 @@
 ---
 description: Reviews code changes for correctness, quality, and regressions without modifying anything
 mode: primary
+steps: 2
 permissions:
   # Deny everything by default, then allow only the read-only tools.
   - action: "*"
