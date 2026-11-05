@@ -17,88 +17,93 @@
       } // Disallow shell/bash
     },
   },
+  "watcher": {
+    "ignore": [
+      "logs/**"
+    ],
+  },
   "permissions": [
     {
       "action": "shell",
       "resource": "*",
-      "effect": "ask"
+      "effect": "ask",
     },
     {
       "action": "shell",
       "resource": "bootdev run *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "uv run pytest *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "uv run ruff check *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "uv run ruff format *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "uv run ty check *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "uv run sloperator.py *",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "shell",
-      "resource": "opencode debug config *",
-      "effect": "allow"
-    },
-    {
-      "action": "shell",
-      "resource": "opencode debug agents *",
-      "effect": "allow"
-    },
-    {
-      "action": "shell",
-      "resource": "opencode debug paths *",
-      "effect": "allow"
+      "resource": "opencode debug *",
+      "effect": "allow",
     },
     {
       "action": "shell",
       "resource": "mktemp *",
-      "effect": "allow"
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "cat *",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "grep *",
+      "effect": "allow",
     },
     // Scratch files under /tmp/opencode. These are already allowed by the
     // default policy, but stating them makes the intent explicit.
     {
       "action": "external_directory",
       "resource": "/tmp/opencode/*",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "read",
       "resource": "/tmp/opencode/*",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "edit",
       "resource": "/tmp/opencode/*",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
       "action": "run_slop",
       "resource": "*",
-      "effect": "allow"
+      "effect": "allow",
     },
     {
-      "action": "subagent",
-      "resource": "explore",
-      "effect": "deny"
+      "action": "shell",
+      "resource": "echo *",
+      "effect": "allow",
     },
   ]
 }
