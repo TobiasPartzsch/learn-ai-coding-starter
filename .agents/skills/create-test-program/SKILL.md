@@ -16,7 +16,7 @@ Read `docs/spec.md` and find the section that defines the feature: syntax, prece
 
 ## 2. Write the example
 
-Create `examples/<feature>.slop`, named after the feature in lowercase, joining words with underscores (for example `examples/short_circuit.slop`).
+Create `examples/<feature>.slop`, named after the feature in lowercase, joining words with hyphens (for example `examples/short-circuit.slop`).
 
 Conventions, taken from the existing examples:
 
@@ -48,7 +48,7 @@ from sloperator.runner import run_source
 EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
 
 OUTPUTS = {
-    "short_circuit": "left\nright\n",
+    "short-circuit": "left\nright\n",
 }
 
 
