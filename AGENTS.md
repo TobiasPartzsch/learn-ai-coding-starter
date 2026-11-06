@@ -15,6 +15,7 @@
 - `uv run ruff check`
 - `uv run ty check`
 - For comparison precedence changes, run `uv run pytest tests/test_comparisons.py -q`.
+- After completing all Python code and test changes, run uv run ruff format once as the final step. If you make further Python changes afterward, run it again before finishing.
 
 Add a regression test when fixing a bug or adding language behavior. Test observable results and errors rather than private implementation details.
 
