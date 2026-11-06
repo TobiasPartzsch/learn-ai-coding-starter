@@ -214,7 +214,7 @@ class Interpreter:
 
     def call(self, function: Value, arguments: list[Value], paren: Token) -> Value:
         if isinstance(function, Builtin):
-            return function.call(arguments, paren.line)
+            return function.call(tuple(arguments), paren.line)
         if not isinstance(function, SlopFunction):
             raise SlopRuntimeError(paren.line, f"can only call clankers, got {type_name(function)}")
 
@@ -250,7 +250,7 @@ class Interpreter:
             self.environment = previous
             self.call_depth -= 1
 
-    def hallucinate(self, arguments: list[Value], line: int) -> Value:
+    def hallucinate(self, arguments: tuple[Value, ...], line: int) -> Value:
         self.out.write(" ".join(stringify(argument) for argument in arguments) + "\n")
         return None
 
