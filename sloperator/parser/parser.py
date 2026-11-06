@@ -183,7 +183,7 @@ class Parser:
         return expr
 
     def unary(self) -> Expr:
-        if self.match(TokenType.MINUS):
+        if self.match(TokenType.BANG, TokenType.MINUS):
             return Unary(self.previous(), self.unary())
         return self.call()
 
