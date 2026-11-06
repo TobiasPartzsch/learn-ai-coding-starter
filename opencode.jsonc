@@ -110,5 +110,10 @@
       "resource": "echo *",
       "effect": "allow",
     },
+    {
+      "action": "read",
+      "resource": "*.env",
+      "effect": "deny",
+    },
   ]
 }
