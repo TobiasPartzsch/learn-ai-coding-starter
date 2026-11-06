@@ -58,8 +58,6 @@ Trust the interpreter behavior here; update tests/spec deliberately if fixing:
   runs one iteration.
 - A bare `{ ... }` block statement inside a `clanker` is parented to `globals`, so it
   cannot see the function's parameters/locals (unlike `vibe`/`ralph` bodies).
-- `comparison()` calls `equality()`, so equality binds tighter than comparison — the
-  opposite of the spec; mixing `<` and `==` misparses. Use parentheses in tests.
 - Identifier scanning stops at digits (`is_identifier_char` only accepts letters/`_`),
   so `x1` becomes two tokens despite the spec's `[A-Za-z_][A-Za-z0-9_]*`.
 
