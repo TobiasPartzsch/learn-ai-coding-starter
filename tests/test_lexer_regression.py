@@ -18,7 +18,7 @@ def test_lexical_error_after_an_em_dash_comment_reports_the_correct_line():
     attributed to the comment's line instead of the real one.
     """
     with pytest.raises(LexicalError) as info:
-        tokenize("— comment on line one\n\"straight quotes on line two\"")
+        tokenize('— comment on line one\n"straight quotes on line two"')
 
     assert info.value.message == "straight quotes are not supported, use “ and ” for strings"
     assert info.value.line == 2
