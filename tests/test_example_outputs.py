@@ -1,0 +1,19 @@
+from pathlib import Path
+
+import pytest
+
+from sloperator.runner import run_source
+
+EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
+
+OUTPUTS = {
+    "equality": "✅\n❌\n❌\n",
+}
+
+
+@pytest.mark.parametrize(("name", "expected"), sorted(OUTPUTS.items()))
+def test_example_output(name: str, expected: str):
+    source = (EXAMPLES / f"{name}.slop").read_text(encoding="utf-8")
+    result = run_source(source)
+
+    assert (result.stdout, result.stderr, result.exit_code) == (expected, "", 0)
