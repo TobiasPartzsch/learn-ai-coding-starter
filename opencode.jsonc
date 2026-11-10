@@ -107,11 +107,17 @@
       "resource": "*",
       "effect": "allow",
     },
-    // Ask before the agent loads the example-writing workflow.
+    // Let the example-writing workflow load without a prompt, but ask before
+    // Python test changes so weakened assertions stay visible.
+    {
+      "action": "edit",
+      "resource": "tests/*.py",
+      "effect": "ask",
+    },
     {
       "action": "skill",
       "resource": "create-test-program",
-      "effect": "ask",
+      "effect": "allow",
     },
     {
       "action": "shell",
