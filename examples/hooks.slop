@@ -1,0 +1,9 @@
+— A clanker branches with vibe and leaves through ship on either path.
+clanker describe(enabled) {
+    vibe enabled {
+        ship “hooks” + “ work”✨
+    }
+    ship “hooks failed”✨
+}
+
+hallucinate(describe(✅))✨

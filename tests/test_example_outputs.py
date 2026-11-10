@@ -8,6 +8,7 @@ EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
 
 OUTPUTS = {
     "equality": "✅\n❌\n❌\n",
+    "hooks": "hooks work\n",
     "short-circuit": "❌\n✅\n",
 }
 
