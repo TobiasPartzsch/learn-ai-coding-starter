@@ -134,7 +134,8 @@
     "servers": {
       "context7": {
         "type": "remote",
-        "url": "https://mcp.context7.com/mcp"
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": true
       },
       "notion": {
         "type": "remote",
@@ -162,7 +163,8 @@
           "--isolated",
           "--executablePath",
           "/usr/bin/brave-browser"
-        ]
+        ],
+        "disabled": true
       }
     }
   }
