@@ -77,10 +77,10 @@ No implicit conversions.
 slop score = 10✨
 loadbearing LIMIT = 100✨
 score = score + 5✨
-score = score + 1✨
+score += 1✨
 ```
 
-Assignment is a statement, not an expression: `name = expression✨`. It updates the nearest binding. Assigning to a `loadbearing` constant is a runtime error (`cannot assign to loadbearing 'LIMIT'`); assigning to a `clanker` name is also an error. Reading or assigning an undefined name is a runtime error.
+Assignment is a statement, not an expression: `name = expression✨`. It updates the nearest binding. The compound form `name += expression✨` adds the expression to the current value, following the same addition rules as `+` (numbers or strings). Assigning to a `loadbearing` constant is a runtime error (`cannot assign to loadbearing 'LIMIT'`); assigning to a `clanker` name is also an error. Reading or assigning an undefined name is a runtime error.
 
 Every brace block is a lexical scope. Assignment searches the current scope, then each enclosing scope.
 

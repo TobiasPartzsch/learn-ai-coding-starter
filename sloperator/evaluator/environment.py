@@ -31,14 +31,21 @@ class Environment:
         return self.lookup(name, line).value
 
     def assign(self, name: str, value: Value, line: int) -> None:
+        self.assignment_target(name, line).value = value
+
+    def get_for_assignment(self, name: str, line: int) -> Value:
+        return self.assignment_target(name, line).value
+
+    def assignment_target(self, name: str, line: int) -> Binding:
         binding = self.lookup(name, line)
         match binding.kind:
             case BindingKind.MUTABLE:
-                binding.value = value
+                return binding
             case BindingKind.CONSTANT:
                 raise SlopRuntimeError(line, f"cannot assign to loadbearing '{name}'")
             case BindingKind.FUNCTION:
                 raise SlopRuntimeError(line, f"cannot assign to immutable binding '{name}'")
+        raise AssertionError("unreachable")
 
     def lookup(self, name: str, line: int) -> Binding:
         env: Environment | None = self
